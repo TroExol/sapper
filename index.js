@@ -7832,24 +7832,20 @@ var generateCellType = function generateCellType(cell, isLoseGame) {
   }
   return 'cell';
 };
-// CONCATENATED MODULE: ./utils/cloneCells.js
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+// CONCATENATED MODULE: ./utils/shallowCloneCells.js
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 /**
- * Клонирует массив ячеек
+ * Поверхностное клонирование массива ячеек
  * @param {Cell[][]} cells
  * @return {Cell[][]}
  */
-var cloneCells = function cloneCells(cells) {
-  return cells.map(function (row) {
-    return row.map(function (cell) {
-      return _objectSpread({}, cell);
-    });
-  });
+var shallowCloneCells = function shallowCloneCells(cells) {
+  return _toConsumableArray(cells);
 };
 // CONCATENATED MODULE: ./utils/getAroundCells.js
 /**
@@ -7901,9 +7897,9 @@ var getAroundCells = function getAroundCells(cells, _ref) {
   return aroundCells;
 };
 // CONCATENATED MODULE: ./utils/openAroundCells.js
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = openAroundCells_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function openAroundCells_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return openAroundCells_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return openAroundCells_arrayLikeToArray(o, minLen); }
+function openAroundCells_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 
 
@@ -7915,7 +7911,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
  * @return {Cell[][]} - Обновленные ячейки
  */
 var openAroundCells_openAroundCells = function openAroundCells(cells, cell) {
-  var newCells = cloneCells(cells);
+  var newCells = shallowCloneCells(cells);
   var recursivelyOpenAroundCells = function recursivelyOpenAroundCells(cells, cell) {
     var aroundCellCoordinates = getAroundCells(cells, cell);
     var _iterator = _createForOfIteratorHelper(aroundCellCoordinates),
@@ -7983,7 +7979,7 @@ var generateEmptyCells = function generateEmptyCells(gridSize) {
  * @return {Cell[][]}
  */
 var generateInitialCells_generateInitialCells = function generateInitialCells(cells, cell, initialCountMines) {
-  var newCells = cloneCells(cells);
+  var newCells = shallowCloneCells(cells);
   var openedCell = newCells[cell.yAxis][cell.xAxis];
 
   // Генерация мин
@@ -8033,6 +8029,25 @@ var generateInitialCells_generateInitialCells = function generateInitialCells(ce
   });
   return openAroundCells_openAroundCells(newCells, openedCell);
 };
+// CONCATENATED MODULE: ./utils/deepCloneCells.js
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+/**
+ * Глубокое клонирование массива ячеек
+ * @param {Cell[][]} cells
+ * @return {Cell[][]}
+ */
+var deepCloneCells = function deepCloneCells(cells) {
+  return cells.map(function (row) {
+    return row.map(function (cell) {
+      return _objectSpread({}, cell);
+    });
+  });
+};
 // CONCATENATED MODULE: ./hooks/useSapper.js
 function useSapper_typeof(obj) { "@babel/helpers - typeof"; return useSapper_typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, useSapper_typeof(obj); }
 function useSapper_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -8046,6 +8061,7 @@ function useSapper_unsupportedIterableToArray(o, minLen) { if (!o) return; if (t
 function useSapper_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -8095,7 +8111,7 @@ function useSapper() {
     isLoseGame = _useState10[0],
     setIsLoseGame = _useState10[1];
   // Ячейки
-  var _useState11 = Object(react["useState"])(emptyCells),
+  var _useState11 = Object(react["useState"])(deepCloneCells(emptyCells)),
     _useState12 = _slicedToArray(_useState11, 2),
     cells = _useState12[0],
     setCells = _useState12[1];
@@ -8132,7 +8148,7 @@ function useSapper() {
    * @param {Cell} cell - Открытая ячейка
    */
   var openFirstCell = function openFirstCell(cells, cell) {
-    var newCells = cloneCells(cells);
+    var newCells = shallowCloneCells(cells);
     var openedCell = newCells[cell.yAxis][cell.xAxis];
     openedCell.isOpen = true;
     openedCell.cellType = generateCellType(openedCell, false);
@@ -8143,9 +8159,10 @@ function useSapper() {
   var winGame = function winGame(cells) {
     setIsGameInProgress(false);
     setIsWinGame(true);
+    setCountMines(0);
 
     // Отметка флагом оставшиеся мины
-    var newCells = cloneCells(cells).map(function (row) {
+    var newCells = shallowCloneCells(cells).map(function (row) {
       return row.map(function (cell) {
         return useSapper_objectSpread(useSapper_objectSpread({}, cell), {}, {
           isFlag: cell.isFlag || !cell.isOpen,
@@ -8166,7 +8183,7 @@ function useSapper() {
     setIsLoseGame(true);
 
     // Отображение мин
-    var newCells = cloneCells(cells).map(function (row) {
+    var newCells = shallowCloneCells(cells).map(function (row) {
       return row.map(function (cell) {
         return useSapper_objectSpread(useSapper_objectSpread({}, cell), {}, {
           cellType: generateCellType(cell, true)
@@ -8193,7 +8210,7 @@ function useSapper() {
    * @type {function(Cell): void}
    */
   var onCellFocusIn = Object(react["useCallback"])(function (cell) {
-    if (isGameInProgress && !cell.isOpen) {
+    if (isGameInProgress && !cell.isOpen && !cell.isFlag && !cell.isQuestion) {
       setSmileType('smile-scared');
     }
   }, [isGameInProgress]);
@@ -8210,7 +8227,7 @@ function useSapper() {
     setIsGameInProgress(false);
     setIsWinGame(false);
     setIsLoseGame(false);
-    setCells(emptyCells);
+    setCells(deepCloneCells(emptyCells));
     setTimer(0);
     setCountMines(initialCountMines);
     setSmileType('smile');
@@ -8221,11 +8238,11 @@ function useSapper() {
    * @type {function(Cell[][], Cell): void}
    */
   var onOpenCell = Object(react["useCallback"])(function (cells, cell) {
-    var newCells = cloneCells(cells);
-    var openedCell = newCells[cell.yAxis][cell.xAxis];
-    if (isLoseGame || isWinGame || openedCell.isOpen || openedCell.isFlag || openedCell.isQuestion) {
+    if (isLoseGame || isWinGame || cell.isOpen || cell.isFlag || cell.isQuestion) {
       return;
     }
+    var newCells = shallowCloneCells(cells);
+    var openedCell = newCells[cell.yAxis][cell.xAxis];
     if (!isGameInProgress) {
       setIsGameInProgress(true);
       openFirstCell(newCells, openedCell);
@@ -8261,11 +8278,11 @@ function useSapper() {
     if (!isGameInProgress) {
       return;
     }
-    var newCells = cloneCells(cells);
-    var clickedCell = newCells[cell.yAxis][cell.xAxis];
-    if (clickedCell.isOpen) {
+    if (cell.isOpen) {
       return;
     }
+    var newCells = shallowCloneCells(cells);
+    var clickedCell = newCells[cell.yAxis][cell.xAxis];
     if (clickedCell.isFlag) {
       clickedCell.isFlag = false;
       clickedCell.isQuestion = true;
