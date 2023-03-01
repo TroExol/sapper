@@ -8193,7 +8193,7 @@ function useSapper() {
    * @type {function(Cell): void}
    */
   var onCellFocusIn = Object(react["useCallback"])(function (cell) {
-    if (isGameInProgress && cell.isOpen) {
+    if (isGameInProgress && !cell.isOpen) {
       setSmileType('smile-scared');
     }
   }, [isGameInProgress]);
