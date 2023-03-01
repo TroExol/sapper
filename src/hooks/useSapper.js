@@ -130,7 +130,7 @@ export function useSapper({
      * @type {function(Cell): void}
      */
     const onCellFocusIn = useCallback(cell => {
-        if (isGameInProgress && cell.isOpen) {
+        if (isGameInProgress && !cell.isOpen) {
             setSmileType('smile-scared');
         }
     }, [isGameInProgress]);
