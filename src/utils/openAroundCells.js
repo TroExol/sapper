@@ -20,8 +20,10 @@ export const openAroundCells = (cells, cell) => {
             if (aroundCell.isOpen || aroundCell.isMine || aroundCell.isFlag || aroundCell.isQuestion) {
                 continue;
             }
+            
             aroundCell.isOpen = true;
             aroundCell.cellType = generateCellType(aroundCell, false);
+            
             if (!aroundCell.countMines && !aroundCell.isMine) {
                 recursivelyOpenAroundCells(cells, aroundCell);
             }
