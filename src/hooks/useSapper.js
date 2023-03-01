@@ -130,7 +130,7 @@ export function useSapper({
      * @type {function(Cell): void}
      */
     const onCellFocusIn = useCallback(cell => {
-        if (isGameInProgress && !cell.isOpen) {
+        if (isGameInProgress && !cell.isOpen && !cell.isFlag && !cell.isQuestion) {
             setSmileType('smile-scared');
         }
     }, [isGameInProgress]);
@@ -158,12 +158,12 @@ export function useSapper({
      * @type {function(Cell[][], Cell): void}
      */
     const onOpenCell = useCallback((cells, cell) => {
-        const newCells = cloneCells(cells);
-        const openedCell = newCells[cell.yAxis][cell.xAxis];
-        
-        if (isLoseGame || isWinGame || openedCell.isOpen || openedCell.isFlag || openedCell.isQuestion) {
+        if (isLoseGame || isWinGame || cell.isOpen || cell.isFlag || cell.isQuestion) {
             return;
         }
+        
+        const newCells = cloneCells(cells);
+        const openedCell = newCells[cell.yAxis][cell.xAxis];
         
         if (!isGameInProgress) {
             setIsGameInProgress(true);
@@ -203,12 +203,12 @@ export function useSapper({
             return;
         }
         
-        const newCells = cloneCells(cells);
-        const clickedCell = newCells[cell.yAxis][cell.xAxis];
-        
-        if (clickedCell.isOpen) {
+        if (cell.isOpen) {
             return;
         }
+        
+        const newCells = cloneCells(cells);
+        const clickedCell = newCells[cell.yAxis][cell.xAxis];
         
         if (clickedCell.isFlag) {
             clickedCell.isFlag = false;
