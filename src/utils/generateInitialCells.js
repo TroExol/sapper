@@ -1,6 +1,6 @@
 import {getAroundCells} from 'Util/getAroundCells';
 import {openAroundCells} from 'Util/openAroundCells';
-import {cloneCells} from 'Util/cloneCells';
+import {shallowCloneCells} from 'Util/shallowCloneCells';
 
 /**
  * Генерация начальной сетки
@@ -10,7 +10,7 @@ import {cloneCells} from 'Util/cloneCells';
  * @return {Cell[][]}
  */
 export const generateInitialCells = (cells, cell, initialCountMines) => {
-    const newCells = cloneCells(cells);
+    const newCells = shallowCloneCells(cells);
     const openedCell = newCells[cell.yAxis][cell.xAxis];
     
     // Генерация мин

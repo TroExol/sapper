@@ -3,10 +3,11 @@ import {useCallback, useEffect, useState} from 'react';
 import Settings from 'Settings';
 
 import {generateCellType} from 'Util/generateCellType';
-import {cloneCells} from 'Util/cloneCells';
+import {shallowCloneCells} from 'Util/shallowCloneCells';
 import {openAroundCells} from 'Util/openAroundCells';
 import {generateEmptyCells} from 'Util/generateEmptyCells';
 import {generateInitialCells} from 'Util/generateInitialCells';
+import {deepCloneCells} from 'Util/deepCloneCells';
 
 /**
  * Хук для игры в сапера
@@ -32,7 +33,7 @@ export function useSapper({
     // Флаг проигрыша
     const [isLoseGame, setIsLoseGame] = useState(false);
     // Ячейки
-    const [cells, setCells] = useState(emptyCells);
+    const [cells, setCells] = useState(deepCloneCells(emptyCells));
     // Таймер
     const [timer, setTimer] = useState(0);
     // Счетчик мин
@@ -62,7 +63,7 @@ export function useSapper({
      * @param {Cell} cell - Открытая ячейка
      */
     const openFirstCell = (cells, cell) => {
-        const newCells = cloneCells(cells);
+        const newCells = shallowCloneCells(cells);
         const openedCell = newCells[cell.yAxis][cell.xAxis];
         
         openedCell.isOpen = true;
@@ -75,16 +76,18 @@ export function useSapper({
     const winGame = cells => {
         setIsGameInProgress(false);
         setIsWinGame(true);
+        setCountMines(0);
         
         // Отметка флагом оставшиеся мины
-        const newCells = cloneCells(cells).map(row =>
-            row.map(cell => ({
-                ...cell,
-                isFlag: cell.isFlag || !cell.isOpen,
-                cellType: cell.isFlag || !cell.isOpen
-                    ? 'cell-flag'
-                    : cell.cellType,
-            })));
+        const newCells = shallowCloneCells(cells)
+            .map(row =>
+                row.map(cell => ({
+                    ...cell,
+                    isFlag: cell.isFlag || !cell.isOpen,
+                    cellType: cell.isFlag || !cell.isOpen
+                        ? 'cell-flag'
+                        : cell.cellType,
+                })));
         
         setCells(newCells);
         setSmileType('smile-cool');
@@ -99,12 +102,13 @@ export function useSapper({
         setIsLoseGame(true);
         
         // Отображение мин
-        const newCells = cloneCells(cells).map(row =>
-            row.map(cell => ({
-                ...cell,
-                cellType: generateCellType(cell, true),
-            })),
-        );
+        const newCells = shallowCloneCells(cells)
+            .map(row =>
+                row.map(cell => ({
+                    ...cell,
+                    cellType: generateCellType(cell, true),
+                })),
+            );
         
         setCells(newCells);
         setSmileType('smile-dead');
@@ -147,7 +151,7 @@ export function useSapper({
         setIsGameInProgress(false);
         setIsWinGame(false);
         setIsLoseGame(false);
-        setCells(emptyCells);
+        setCells(deepCloneCells(emptyCells));
         setTimer(0);
         setCountMines(initialCountMines);
         setSmileType('smile');
@@ -162,7 +166,7 @@ export function useSapper({
             return;
         }
         
-        const newCells = cloneCells(cells);
+        const newCells = shallowCloneCells(cells);
         const openedCell = newCells[cell.yAxis][cell.xAxis];
         
         if (!isGameInProgress) {
@@ -207,7 +211,7 @@ export function useSapper({
             return;
         }
         
-        const newCells = cloneCells(cells);
+        const newCells = shallowCloneCells(cells);
         const clickedCell = newCells[cell.yAxis][cell.xAxis];
         
         if (clickedCell.isFlag) {

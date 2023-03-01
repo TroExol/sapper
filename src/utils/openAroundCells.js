@@ -1,4 +1,4 @@
-import {cloneCells} from 'Util/cloneCells';
+import {shallowCloneCells} from 'Util/shallowCloneCells';
 import {getAroundCells} from 'Util/getAroundCells';
 import {generateCellType} from 'Util/generateCellType';
 
@@ -9,7 +9,7 @@ import {generateCellType} from 'Util/generateCellType';
  * @return {Cell[][]} - Обновленные ячейки
  */
 export const openAroundCells = (cells, cell) => {
-    const newCells = cloneCells(cells);
+    const newCells = shallowCloneCells(cells);
     
     const recursivelyOpenAroundCells = (cells, cell) => {
         const aroundCellCoordinates = getAroundCells(cells, cell);
