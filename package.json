@@ -1,10 +1,13 @@
 {
-  "homepage": "http://troexol.github.io/sapper",
   "name": "sapper",
   "version": "0.1.0",
   "private": true,
   "author": "Иван Клочковский",
   "main": "./src/index.js",
+  "homepage": "http://troexol.github.io/sapper",
+  "repository": {
+    "url": "git+https://github.com/troexol/sapper.git"
+  },
   "dependencies": {
     "jss": "^10.9.2",
     "jss-plugin-default-unit": "^10.9.2",
