@@ -4,6 +4,7 @@
   "private": true,
   "author": "Иван Клочковский",
   "main": "./src/index.js",
+  "homepage": "http://troexol.github.io/sapper",
   "dependencies": {
     "jss": "^10.9.2",
     "jss-plugin-default-unit": "^10.9.2",
@@ -13,9 +14,11 @@
     "react-jss": "^10.9.2"
   },
   "scripts": {
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build",
     "postinstall": "git config core.hooksPath ./git-hooks",
     "start": "webpack-dev-server --watch --progress --mode=development --inline --hot --config webpack/local.js",
-    "production": "webpack --mode=production --config webpack/production.js",
+    "build": "webpack --mode=production --config webpack/production.js",
     "linter": "eslint src/ --ext .js --ext .jsx"
   },
   "browserslist": {
@@ -46,6 +49,7 @@
     "favicons": "^7.0.1",
     "favicons-webpack-plugin": "^4.2.0",
     "file-loader": "3.0.1",
+    "gh-pages": "^5.0.0",
     "html-loader": "0.5.5",
     "html-webpack-plugin": "4.5.2",
     "minimist": "^1.2.8",
