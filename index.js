@@ -8642,7 +8642,7 @@ function Grid(_ref) {
       return /*#__PURE__*/react_default.a.createElement(components_SpriteImage, {
         key: "".concat(cell.yAxis, "_").concat(cell.xAxis),
         element: cell.cellType,
-        className: !isWinGame && !isLoseGame && !cell.isOpen && classes.cell,
+        className: !isWinGame && !isLoseGame && !cell.isOpen && classes.activeCell,
         onClick: function onClick() {
           return onOpenCell(cells, cell);
         },
@@ -8676,7 +8676,7 @@ var Grid_styles = function styles(_ref) {
         return "repeat(".concat(gridSize, ", 1fr)");
       }
     },
-    cell: {
+    activeCell: {
       cursor: 'pointer'
     }
   };
