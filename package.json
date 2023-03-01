@@ -14,8 +14,8 @@
     "react-jss": "^10.9.2"
   },
   "scripts": {
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "postinstall": "git config core.hooksPath ./git-hooks",
     "start": "webpack-dev-server --watch --progress --mode=development --inline --hot --config webpack/local.js",
     "build": "webpack --mode=production --config webpack/production.js",
