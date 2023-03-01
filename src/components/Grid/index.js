@@ -13,7 +13,7 @@ const styles = ({
         display: 'grid',
         gridTemplateColumns: ({gridSize = Settings.defaultGridSize}) => `repeat(${gridSize}, 1fr)`,
     },
-    cell: {
+    activeCell: {
         cursor: 'pointer',
     },
 });

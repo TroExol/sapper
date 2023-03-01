@@ -21,7 +21,7 @@ function Grid({
                     <SpriteImage
                         key={`${cell.yAxis}_${cell.xAxis}`}
                         element={cell.cellType}
-                        className={(!isWinGame && !isLoseGame && !cell.isOpen) && classes.cell}
+                        className={!isWinGame && !isLoseGame && !cell.isOpen && classes.activeCell}
                         onClick={() => onOpenCell(cells, cell)}
                         onMouseDown={() => onCellFocusIn(cell)}
                         onMouseUp={onCellFocusOut}
