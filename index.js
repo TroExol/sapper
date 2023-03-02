@@ -8139,7 +8139,9 @@ function useSapper() {
     } else {
       clearInterval(intervalTimer);
     }
-    return clearInterval(intervalTimer);
+    return function () {
+      return clearInterval(intervalTimer);
+    };
   }, [isGameInProgress]);
 
   /**
