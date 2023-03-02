@@ -54,7 +54,7 @@ export function useSapper({
             clearInterval(intervalTimer);
         }
         
-        return clearInterval(intervalTimer);
+        return () => clearInterval(intervalTimer);
     }, [isGameInProgress]);
     
     /**
